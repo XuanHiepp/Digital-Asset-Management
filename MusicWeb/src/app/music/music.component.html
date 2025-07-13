@@ -1,0 +1,369 @@
+<div class="space-200"></div>
+<div class="container">
+    <h1 *ngIf="openFormAddMusic == false">Tạo khóa bảo mật</h1>  
+    <form class="form-style-12" #key1Post="ngForm" *ngIf="!signatureKey1" autocomplete="off" (ngSubmit)="addKey1(key1Post.value)">
+        <ul>
+            <li>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Thành phần khóa 1 (x):</label>
+                        <input name="key1X" ngModel class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Chủ sở hữu:</label>
+                        <input name="ownerId" class="form-control" value="{{userID}}" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Loại khóa:</label>
+                        <input name="typeKey1" class="form-control" value="1" disabled>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-group" style="margin: 0 auto;">
+                    <input type="submit"  value="Yêu cầu tạo khóa" />
+                </div>
+            </li>
+        </ul>
+    </form>
+
+    <form class="form-style-12" #checkSignKey1Post="ngForm" *ngIf="openFormKey2 == false && signatureKey1" autocomplete="off" (ngSubmit)="signKey1(checkSignKey1Post.value)">
+        <ul>
+            <li>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Hash Message Khóa 1:</label>
+                        <input name="hashedMessage" ngModel class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Signature Khóa 1:</label>
+                        <input name="signature" class="form-control" ngModel>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Loại khóa:</label>
+                        <input name="typeKey1" class="form-control" value="1" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Chủ sở hữu:</label>
+                        <input name="ownerId" class="form-control" value="{{userID}}" disabled>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-group" style="margin: 0 auto;">
+                    <input type="submit"  value="Xác nhận chữ kí" />
+                </div>
+            </li>
+            
+            <li *ngIf="checkSign == null">
+                <div class="col-md-12">
+                    <div class="form-group" *ngIf="hashedMessageKey1">
+                        <label>Hashed Message:</label><br>
+                        <label style="word-break: break-all;">{{hashedMessageKey1}}</label>
+                    </div>
+                    <div class="form-group" *ngIf="signatureKey1">
+                        <label>Signature:</label>
+                        <label style="word-break: break-all;">{{signatureKey1}}</label>
+                    </div>
+                </div>
+            </li>
+            <li *ngIf="checkSign != null" style="margin-top: 39px;">
+                <div class="col-md-12" *ngIf="checkSign == false">
+                    <div class="form-group">
+                        <label>Check Signature:</label><br>
+                        <label>Chữ kí không hợp lệ</label>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="checkSign == true">
+                    <div class="form-group">
+                        <label>Check Signature:</label><br>
+                        <label>Chữ kí hợp lệ</label>
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="checkSign == true">
+                    <div class="form-group">
+                        <button class="btn btn-warning text-white" (click)="activeFormKey2()" style="background-color: orange;">Thêm chữ kí 2</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </form>
+
+    <form class="form-style-12" #key2Post="ngForm" *ngIf="openFormKey2 == true && !signatureKeyServer" autocomplete="off" (ngSubmit)="addKey2(key2Post.value)">
+        <ul>
+            <li>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Thành phần khóa 1 (g):</label>
+                        <input name="pValue" class="form-control" value="{{pValue}}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Khóa 1:</label>
+                        <input name="fullKey1X" class="form-control" value="{{fullKey1X}}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Loại khóa:</label>
+                        <input name="keyType" class="form-control" value="0" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Thành phần khóa 2 (y):</label>
+                        <input name="key2X" class="form-control" value="" ngModel>
+                    </div>
+                    <div class="form-group">
+                        <label>Chủ sở hữu:</label>
+                        <input name="ownerId" class="form-control" value="{{userID}}" disabled>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-group" style="margin: 0 auto;">
+                    <input type="submit"  value="Xác nhận chữ kí" />
+                </div>
+            </li>
+        </ul>
+    </form>
+
+    <form class="form-style-12" #checkSignKeyServerPost="ngForm" *ngIf="signatureKeyServer && openFormUploadMusic == false" autocomplete="off" (ngSubmit)="signKeyServer(checkSignKeyServerPost.value)">
+        <ul>
+            <li>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Hash Message Khóa 2:</label>
+                        <input name="hashedMessage" ngModel class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Signature Khóa 2:</label>
+                        <input name="signature" class="form-control" ngModel>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Loại khóa:</label>
+                        <input name="typeKeyS" class="form-control" value="0" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Chủ sở hữu:</label>
+                        <input name="ownerId" class="form-control" value="Server" disabled>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-group" style="margin: 0 auto;">
+                    <input type="submit"  value="Xác nhận chữ kí Server" />
+                </div>
+            </li>
+            
+            <li *ngIf="checkSignServer == null">
+                <div class="col-md-12">
+                    <div class="form-group" *ngIf="hashedMessageKeyServer">
+                        <label>Hashed Message:</label><br>
+                        <label style="word-break: break-all;">{{hashedMessageKeyServer}}</label>
+                    </div>
+                    <div class="form-group" *ngIf="signatureKeyServer">
+                        <label>Signature:</label>
+                        <label style="word-break: break-all;">{{signatureKeyServer}}</label>
+                    </div>
+                </div>
+            </li>
+            <li *ngIf="checkSignServer != null" style="margin-top: 39px;">
+                <div class="col-md-12" *ngIf="checkSignServer == false">
+                    <div class="form-group">
+                        <label>Check Signature:</label><br>
+                        <label>Chữ kí không hợp lệ</label>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="checkSignServer == true">
+                    <div class="form-group">
+                        <label>Check Signature:</label><br>
+                        <label>Chữ kí hợp lệ</label>
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="checkSignServer == true">
+                    <div class="form-group">
+                        <button class="btn btn-warning text-white" (click)="activeFormUploadMusic()" style="background-color: orange;">Mã hóa nhạc số!</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<div class="container" *ngIf="openFormUploadMusic != null && openFormUploadMusic == true && openFormAddMusic == false">
+    <h1>Music Asset Encrypt</h1>  
+    <form class="form-style-12" #encryptPost="ngForm" autocomplete="off" (ngSubmit)="encryptMusic()">
+        <ul>
+            <li>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="encrypType">Loại mã hóa:</label>
+                        <select class="form-control" name="encrypType" id="encrypType" ngModel>
+                            <option disabled value="">Select Encrypt Type</option>
+                            <option value="0" selected>AES Encryption</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="musicAsset">Nhạc số:</label>
+                        <input type="file" name="musicAsset" (change)="musicAssetEncryptChange($event)" id="musicAsset" ngModel class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="musicType">Loại nhạc số:</label>
+                        <select class="form-control" (change)="musicTypeChange($event.target.value)" name="musicType" id="musicType">
+                            <option disabled value="">Select Owner Type</option>
+                            <option value="0">Lyrics</option>
+                            <option value="1">Audio</option>
+                            <option value="2">Video</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Key mã hóa:</label>
+                        <input name="password" class="form-control" value="{{fullKey}}" disabled>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-group" style="margin: 0 auto;">
+                    <input type="submit"  value="Mã hóa" />
+                </div>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<div class="container" *ngIf="openFormAddMusic == true">
+    <h1>Music Asset Add</h1>  
+    <form class="form-style-12" #musicPost="ngForm" autocomplete="off" *ngIf="service.formData" (ngSubmit)="addMusic(musicPost.value)">
+        <ul>
+            <li>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tên nhạc số</label>
+                        <input name="name" ngModel class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Tiêu đề</label>
+                        <input name="title" ngModel class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Album</label>
+                        <input name="album" ngModel class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Chủ sở hữu</label>
+                        <select class="form-control" name="ownerId" id="ownerId" ngModel>
+                            <option disabled value="">Select Creature Type</option>
+                            <option *ngFor="let item of userList" value="{{item.userID}}">{{item.firstName}} {{item.lastName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Năm xuất bản</label>
+                        <input name="publishingYear" ngModel class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Văn bằng bản quyền</label>
+                        <input type="file" name="licenceLink" (change)="onLicenceSelected($event)" ngModel class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="creatureType">CreatureType:</label>
+                        <select class="form-control" name="creatureType" id="creatureType" ngModel>
+                            <option disabled value="">Select Creature Type</option>
+                            <option value="0" selected>Unknown</option>
+                            <option value="1">Lyrics</option>
+                            <option value="2">Audio</option>
+                            <option value="3">MV</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ownerType">OwnerType:</label>
+                        <select class="form-control" name="ownerType" id="ownerType" ngModel>
+                            <option disabled value="">Select Owner Type</option>
+                            <option value="0" selected>Unknown</option>
+                            <option value="1">Composer</option>
+                            <option value="2">SongWriter</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="musicType">Loại nhạc số:</label>
+                        <select class="form-control" (change)="musicTypeChange($event.target.value)" name="musicType" id="musicType">
+                            <option disabled value="">Select Owner Type</option>
+                            <option value="0">Lyrics</option>
+                            <option value="1">Audio</option>
+                            <option value="2">Video</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="musicAssetDemo">File Demo:</label>
+                        <input type="file" name="musicAssetDemo" (change)="musicAssetDemoChange($event)" id="musicAssetDemo" ngModel class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="musicAsset">Nhạc số:</label>
+                        <input type="file" name="musicAsset" (change)="musicAssetChange($event)" id="musicAsset" ngModel class="form-control" disabled>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-group" style="margin: 0 auto;">
+                    <input type="submit"  value="Upload nhạc số" />
+                </div>
+            </li>
+            <li>
+                <div class="progress" *ngIf="createProgressCheck != null && createProgressCheck == false">
+                    <div class="circle"></div>
+                    <div class="circle-small"></div>
+                    <div class="circle-big"></div>
+                    <div class="circle-inner-inner"></div>
+                    <div class="circle-inner"></div>
+                </div>
+            </li>
+        </ul>
+    </form>
+</div>
+<div class="space-100"></div>
+<div class="container">
+    <div class="music-blk container">
+        <h1>Music Asset List</h1>  
+        <table class="blk-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Title</th>
+                    <th>Album</th>
+                    <th>Publishing Year</th>
+                    <th>Owner Id</th>
+                    <th>Creature Type</th>
+                    <th>Owner Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of musicItemList; let indexOfelement=index;">
+                    <td>{{item.name}}</td>
+                    <td>Title {{indexOfelement+1}}</td>
+                    <td>{{item.album}}</td>    
+                    <td>{{item.publishingYear}}</td>
+                    <td>{{item.ownerId}}</td>
+                    <td>{{item.creatureType}}</td>
+                    <td>{{item.ownerType}}</td>
+                </tr>
+            </tbody>
+        </table>  
+    </div>
+</div>
+<div class="space-100"></div>

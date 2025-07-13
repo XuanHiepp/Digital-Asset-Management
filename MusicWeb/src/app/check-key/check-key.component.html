@@ -1,0 +1,47 @@
+<div class="space-100"></div>
+<link href='https://fonts.googleapis.com/css?family=Allerta' rel='stylesheet'>
+
+<div class="container">
+   <article class="card">
+       <header class="card-header"> Thông tin tác phẩm </header>
+       <div class="card-body">
+           <h6>Mã nhạc số: DAM5345435</h6>
+           <article class="card">
+               <div class="card-body row">
+                   <div class="col"> <strong>File đính kèm</strong> <br>Lyrics </div>
+                   <div class="col"> <strong>Tên tác phẩm</strong> <br>29 nov 2019 </div>
+                   <div class="col"> <strong>Sở hữu bởi:</strong> <br> BLUEDART, | <i class="fa fa-phone"></i> +1598675986 </div>
+                   <div class="col"> <strong>Đăng tải</strong> <br> Picked by the courier </div>
+                   <div class="col"> <strong>Trị giá gốc</strong> <br> 200,000 VNĐ </div>
+               </div>
+           </article>
+           <article class="card">
+               <div class="card-body row">
+                    <div class="col-md-12">
+                        <form class="form-style-12" #key1VerifyPost="ngForm" autocomplete="off" (ngSubmit)="loadInfoSubmit(key1VerifyPost.value)">
+                            <div class="form-group">
+                                <label>Khóa 1:</label><br>
+                                <input name="key1" ngModel class="form-control">
+                            </div>
+                            <div style="display: flex; margin: 0 auto;">
+                                <div class="form-group" style="margin-right: 20px;">
+                                    <input type="submit" class="btn btn-success"  value="Xác nhận" />
+                                </div>
+                                <button class="btn btn-danger" (click)="playMusic()"  *ngIf="fullKeyCheck == true && mediaLink == undefined && creatureType == 3" style="height: 50%;">Load Music</button>
+                                <a [href]="mediaLinkTrust" class="btn btn-danger" *ngIf="fullKeyCheck == true && mediaLink != undefined && creatureType == 3" style="height: 29%;">Play Music</a>
+                                <a [href]="musicLinkTrust" class="btn btn-danger" *ngIf="fullKeyCheck == true && creatureType == 2" style="height: 29%;">Play Audio</a>
+                            </div>
+                        </form>
+                        <div class="progress" *ngIf="createMediaProgressCheck != null && createMediaProgressCheck == false">
+                            <div class="circle"></div>
+                            <div class="circle-small"></div>
+                            <div class="circle-big"></div>
+                            <div class="circle-inner-inner"></div>
+                            <div class="circle-inner"></div>
+                        </div>
+                    </div>
+               </div>
+           </article>
+       </div>
+   </article>
+</div>

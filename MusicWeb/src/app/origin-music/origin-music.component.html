@@ -1,0 +1,108 @@
+<div class="space-100"></div>
+<div class="courses-container">
+	<div class="course">
+		<div class="course-preview">
+			<h6 class="text-center">Thông tin nguồn gốc</h6>
+			<img src="../../assets/video.png" alt="" style="position: absolute; width: 38%; top: 80px; left: 106px; border-radius: 20%;">
+            <button class="btn">Continue</button>
+		</div>
+		<div class="course-info">
+			<div class="progress-container">
+				<div class="progress"></div>
+				<span class="progress-text" style="color: black; font-weight: 600;">
+					6/9 Challenges
+				</span>
+			</div>
+			<h6>Audio</h6>
+            <h2>{{musicItem.name}}</h2>
+            <div class="info-music" style="margin-top: 31px;">
+                <div class="info-1">
+                    <h6 class="title">ID</h6>
+                    <h6>{{idTransfer}}</h6>
+                </div>
+                <div class="info-1">
+                    <h6 class="title">Album</h6>
+                    <h6>{{musicItem.album}}</h6>
+                </div>
+                <div class="info-1">
+                    <h6 class="title">Năm phát hành</h6>
+                    <h6>{{musicItem.publishingYear}}</h6>
+                </div>
+            </div>
+            <div class="info-music" style="margin-top: 38px;">
+                <div class="info-1">
+                    <h6 class="title">Người sở hữu</h6>
+                    <h6>{{firstName}} {{lastName}}</h6>
+                </div>
+                <div class="info-1">
+                    <h6 class="title">Người đăng tải</h6>
+                    <h6>{{firstName}} {{lastName}}</h6>
+                </div>
+                <div class="info-1">
+                    <h6 class="title">Nhận lợi nhuận</h6>
+                    <h6>{{firstName}} {{lastName}}</h6>
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+<div class="ver5 m-b-110" style="margin-top: 50px; margin-bottom: 50px;">
+    <h3 style="color: #1875d0;" class="text-center">Giao dịch nhạc số</h3>
+    <br>
+    <table data-vertable="ver5" class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr class="row100 head" style="text-align: center;">
+                <th class="column100 column6" data-column="column6">Txn Hash</th>
+                <th class="column100 column1" data-column="column1">From</th>
+                <th class="column100 column1" data-column="column1">To</th>
+                <th class="column100 column2" data-column="column2">Loại giao dịch</th>
+                <th class="column100 column3" data-column="column3">Trị giá</th>
+                <th class="column100 column4" data-column="column4">Giao dịch</th>
+                <th class="column100 column5" data-column="column5">Trạng thái</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="row100" style="text-align: center;">
+                <a href="https://ropsten.etherscan.io/tx/{{musicTransact.transactionHash}}">
+                    <td class="column100 column6" data-column="column6" style="border-color: #80808000;">{{musicTransact.transactionHashLink}}</td>
+                </a>
+                <td class="column100 column1" data-column="column1">
+                    <div class="con-tooltip bottom">
+                        <p>{{fromAddr}}</p>
+                        <div class="tooltip ">
+                          <p>{{fromAddrFull}}</p>
+                        </div>
+                    </div>
+                </td>
+                <td class="column100 column1" data-column="column1">
+                    <div class="con-tooltip bottom">
+                        <p>{{toAddr}}</p>
+                        <div class="tooltip ">
+                          <p>{{toAddrFull}}</p>
+                        </div>
+                    </div>
+                </td>
+                <td class="column100 column2" data-column="column2" *ngIf="musicTransact.tranType == '1'">GD Thương Mại</td>
+                <td class="column100 column2" data-column="column2" *ngIf="musicTransact.tranType == '2'">GD Bản Quyền</td>
+                <td class="column100 column3" data-column="column3">{{musicTransact.amountValue}} Ether</td>
+                <td class="column100 column4" data-column="column4">
+                    <div class="con-tooltip bottom">
+                        <p *ngIf="dateToNow != 0">{{dateToNow}} ngày trước</p>
+                        <p *ngIf="dateToNow == 0">Hôm nay</p>
+                        <div class="tooltip tooltip-date">
+                          <p>{{musicTransact.dateCreated |  date:'dd MMMM yyyy hh:mm:ss'}}</p>
+                        </div>
+                    </div>
+                </td>
+                <td class="column100 column5" data-column="column5" *ngIf="musicTransact.isConfirmed == true">
+                    <span class="badge badge--success">Success</span> 
+                </td>
+                <td class="column100 column5" data-column="column5" *ngIf="musicTransact.isConfirmed == false">
+                    <span class="badge badge--info">Pending</span> 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
