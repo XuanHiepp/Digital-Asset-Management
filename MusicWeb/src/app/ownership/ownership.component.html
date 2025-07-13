@@ -1,0 +1,145 @@
+<div class="space-100"></div>
+<link href='https://fonts.googleapis.com/css?family=Allerta' rel='stylesheet'>
+
+<div class="container">
+   <article class="card">
+       <header class="card-header"> Thông tin tác phẩm </header>
+       <div class="card-body">
+           <h6>Mã nhạc số: DAM5345435</h6>
+           <article class="card">
+               <div class="card-body row">
+                   <div class="col"> <strong>File đính kèm</strong> <br>Lyrics </div>
+                   <div class="col"> <strong>Tên tác phẩm</strong> <br>29 nov 2019 </div>
+                   <div class="col"> <strong>Sở hữu bởi:</strong> <br> BLUEDART, | <i class="fa fa-phone"></i> +1598675986 </div>
+                   <div class="col"> <strong>Đăng tải</strong> <br> Picked by the courier </div>
+                   <div class="col"> <strong>Trị giá gốc</strong> <br> 200,000 VNĐ </div>
+               </div>
+           </article>
+           <article class="card">
+               <div class="card-body row">
+                    <div class="col-md-12">
+                        <h5 class="text-center" style="color: black;">Tạo mã bảo mật</h5>
+                        <br>
+                        <form class="form-style-12 row" #key1Change="ngForm" autocomplete="off" *ngIf="!signatureKey1" (ngSubmit)="addKey1(key1Change.value)">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Khóa 1:</label><br>
+                                    <input name="key1X" ngModel class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Loại khóa:</label>
+                                    <input name="typeKey1" class="form-control" value="1" disabled>
+                                </div>
+                            </div>
+                            <div style="display: flex; margin: 0 auto;">
+                                <div class="form-group" style="margin-right: 20px;">
+                                    <input type="submit" class="btn btn-success"  value="Yêu cầu tạo khóa" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-12" *ngIf="keyCreateCheck == false">
+                        <form class="form-style-12 row" #checkSignKey1Post="ngForm" *ngIf="signatureKey1"  autocomplete="off" (ngSubmit)="signKey1(checkSignKey1Post.value)">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Hash Message Khóa 1:</label>
+                                    <input name="hashedMessage" ngModel class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Signature Khóa 1:</label>
+                                    <input name="signature" class="form-control" ngModel>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Loại khóa:</label>
+                                    <input name="typeKey1" class="form-control" value="1" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Chủ sở hữu:</label>
+                                    <input name="ownerId" class="form-control" value="{{userID}}" disabled>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" style="margin: 0 auto;">
+                                <input type="submit" class="btn btn-warning text-white"  value="Xác nhận chữ kí" />
+                            </div>
+                            
+
+                            <div class="col-md-12 row" style="margin-top: 20px;">
+                                <div class="form-group col-md-6" *ngIf="hashedMessageKey1">
+                                    <label>Hashed Message:</label><br>
+                                    <label style="word-break: break-all;">{{hashedMessageKey1}}</label>
+                                </div>
+                                <div class="form-group col-md-6" *ngIf="signatureKey1">
+                                    <label>Signature:</label>
+                                    <label style="word-break: break-all;">{{signatureKey1}}</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 row" *ngIf="checkSign != null">
+                                <div class="form-group" *ngIf="checkSign == false">
+                                    <label>Check Signature:</label><br>
+                                    <label>Chữ kí không hợp lệ</label>
+                                </div>
+                                <div class="col-md-6" >
+                                    <div class="form-group" *ngIf="checkSign == true">
+                                        <label>Check Signature:</label><br>
+                                        <label>Chữ kí hợp lệ</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" *ngIf="checkSign == true">
+                                    <div class="form-group">
+                                        <button class="btn btn-warning text-white" (click)="createNewKey()">Tạo khóa bảo mật</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-12" *ngIf="keyCreateCheck == true">
+                        <form class="form-style-12" #ownerBeChanged="ngForm" autocomplete="off" (ngSubmit)="updateInfoForMusic(ownerBeChanged.value)">
+                            <div class="row">
+                                <div class="col-md-6" *ngIf="updateCheck == true && updateMusicInfoCheck == false">
+                                    <div class="form-group">
+                                        <label>Người thừa hưởng:</label><br>
+                                        <input *ngIf="inheritUserId != 0" name="ownerId" class="form-control" value="{{inheritUserId}}" disabled>
+                                        <input *ngIf="inheritUserId == 0" name="ownerId" ngModel class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tên tài sản:</label>
+                                        <input name="assetName" class="form-control" value="{{blobName}}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; margin: 0 auto;">
+                                <div class="form-group" style="margin-right: 20px;" *ngIf="updateCheck == false && updateMusicInfoCheck == false">
+                                    <button class="btn btn-success" (click)="changeOwnerShip()">Áp dụng khóa mới</button>
+                                </div>
+                                <div class="form-group" style="margin-right: 20px;" *ngIf="updateCheck == true && updateMusicInfoCheck == false">
+                                    <input type="submit" class="btn btn-success"  value="Áp dụng khóa mới" />
+                                </div>
+                                <div class="form-group" style="margin-right: 20px;" *ngIf="updateMusicInfoCheck == true">
+                                    <a href="/music/user-seller/{{userID}}" class="btn btn-success">Về trang chủ</a>
+                                </div>
+                                <div class="progress" *ngIf="updateProgressCheck != null && updateProgressCheck == false">
+                                    <div class="circle"></div>
+                                    <div class="circle-small"></div>
+                                    <div class="circle-big"></div>
+                                    <div class="circle-inner-inner"></div>
+                                    <div class="circle-inner"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+               </div>
+           </article>
+       </div>
+   </article>
+</div>
+

@@ -1,0 +1,220 @@
+<div class="space-100"></div>
+<div class="container">
+    <article class="card">
+        <header class="card-header"> Thông tin tác phẩm </header>
+        <div class="card-body">
+            <h6>Mã nhạc số: DAM5345435</h6>
+            <article class="card">
+                <div class="card-body row">
+                    <div class="col"> <strong>File đính kèm</strong> <br>Lyrics </div>
+                    <div class="col"> <strong>Tên tác phẩm</strong> <br>29 nov 2019 </div>
+                    <div class="col"> <strong>Sở hữu bởi:</strong> <br> BLUEDART, | <i class="fa fa-phone"></i> +1598675986 </div>
+                    <div class="col"> <strong>Đăng tải</strong> <br> Picked by the courier </div>
+                    <div class="col"> <strong>Trị giá gốc</strong> <br> 200,000 VNĐ </div>
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-body row">
+                    <div class='wrapper'>
+                        <div class='package'>
+                           <div class='name'>Quyền sử dụng</div>
+                           <div class=''>Miễn phí dùng thử</div>
+                           <div class='trial'>Không thời hạn</div>
+                           <hr>
+                           <ul>
+                              <li>
+                                 <strong>4$</strong>
+                                 Chất lượng 128Kps
+                              </li>
+                              <li>
+                                 <strong>8$</strong>
+                                 Chất lượng 320Kps
+                              </li>
+                           </ul>
+                        </div>
+                        <div class='package brilliant'>
+                           <div class='name'>Tái sản xuất</div>
+                           <div class='price'>100$</div>
+                           <div class='trial'>Free 30 day trial</div>
+                           <hr>
+                           <ul>
+                              <li>
+                                 <strong>Unlimited</strong>
+                                 team members
+                              </li>
+                              <li>
+                                 <strong>Unlimited</strong>
+                                 team playlists
+                              </li>
+                              <li>
+                                 <strong>Unlimited</strong>
+                                 public playlists
+                              </li>
+                           </ul>
+                        </div>
+                        <div class='package'>
+                           <div class='name'>Đăng tải Online</div>
+                           <div class='price'>70$</div>
+                           <div class='trial'>Totally free</div>
+                           <hr>
+                           <ul>
+                              <li>
+                                 <strong>5</strong>
+                                 kênh tối đa được cho phép
+                              </li>
+                              <li>
+                                 <strong>3</strong>
+                                 phương tiện tuyền thông
+                              </li>
+                              <li>
+                                 <strong>Unlimited</strong>
+                                 public playlists
+                              </li>
+                           </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </article>
+    <div class="space-50"></div>
+    <article class="card">
+        <header class="card-header"> Thông tin giao dịch </header>
+        <div class="card-body">
+            <ul class="row">
+                <li class="col-md-12">
+                    <div class="audio-type">
+                        <form #transactPost="ngForm" autocomplete="off" (ngSubmit)="excuteTransact(transactPost.value)">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="typeLicence">Loại bản quyền:</label>
+                                        <select class="form-control" id="typeLicence" (change)="licenceTypeChange($event.target.value)" name="typeLicence" style="flex: 0.15; border-radius: 0;">
+                                            <option disabled value="">Loại bản quyền</option>
+                                            <option value="0" selected>Thương mại</option>
+                                            <option value="1">Sở hữu</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="addFrom">Địa chỉ gửi:</label>
+                                        <div style="display: flex;">
+                                            <div style="flex: 0.9;">
+                                                <input type="text" class="form-control" placeholder="Enter Address" id="addFrom" value="{{fromAddress}}" disabled>
+                                                <input type="text" name="fromUserId" class="form-control" placeholder="Enter Address" id="addFromId" ngModel >
+                                            </div>
+                                            <div style="flex: 0.1;">
+                                                <img src="../../assets/refresh.png" alt="" class="btn" style="width: 100%; cursor: pointer;" id="updateAddFrom">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Người mua</label>
+                                        <select class="form-control" name="ownerId" id="ownerId" ngModel (change)="buyerChange($event.target.value)">
+                                            <option disabled value="">Select Creature Type</option>
+                                            <option *ngFor="let item of userList" value="{{item.userID}}">{{item.firstName}} {{item.lastName}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="typeCus">Loại khách hàng:</label>
+                                        <select class="form-control" id="typeCus" name="fanType" style="flex: 0.15; border-radius: 0;" ngModel>
+                                            <option disabled value="">Chọn loại khách hàng</option>
+                                            <option value="0">Buyer</option>
+                                            <option value="1">Listener</option>
+                                            <option value="2">Singer</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="duration">Thời hạn giao dịch:</label>
+                                        <select class="form-control" id="duration" name="duration" (change)="durationTypeChange($event.target.value)" style="flex: 0.15; border-radius: 0;">
+                                            <option disabled value="">Chọn thời hạn giao dịch</option>
+                                            <option value="0">Giao dịch 7 ngày</option>
+                                            <option value="1">Giao dịch 14 ngày</option>
+                                            <option value="2">Giao dịch 1 tháng</option>
+                                            <option value="3">Giao dịch 3 tháng</option>
+                                            <option value="4">Giao dịch 6 tháng</option>
+                                            <option value="5">Giao dịch 1 năm</option>
+                                            <option value="6">Không thời hạn</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="addRe">Địa chỉ nhận:</label>
+                                        <div style="display: flex;">
+                                            <div style="flex: 0.9;">
+                                                <input type="text" class="form-control" placeholder="Enter Address" id="addRe" value="{{user.ownerAddress}}" disabled>
+                                                <input type="text" name="toUserId" class="form-control" placeholder="Enter Address" id="addReId" ngModel>
+                                            </div>
+                                            <div style="flex: 0.1;">
+                                                <img src="../../assets/refresh.png" alt="" class="btn" style="width: 100%; cursor: pointer;" id="updateaddRe">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="typeDuration">Loại thời hạn:</label>
+                                        <select class="form-control" id="typeDuration" name="typeDuration" style="flex: 0.15; border-radius: 0;" disabled>
+                                            <option disabled value="">Chọn thời hạn giao dịch</option>
+                                            <option value="0">Giao dịch dài hạn</option>
+                                            <option value="1" selected>Giao dịch ngắn hạn</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="priceLicence">Trị giá biến động:</label>
+                                        <input type="text" name="amountValue" class="form-control" id="priceLicence" value="1" disabled>
+                                    </div>
+                                </div>	
+                                <div class="col-md-12" id="reason" style="display: none;">
+                                    <div class="form-group">
+                                        <label for="reasonLicence">Lý do mua bản quyền:</label>
+                                        <textarea class="form-control" id="reasonLicence" name="reasonLicence">
+                                        </textarea>  
+                                    </div> 
+                                </div>
+                            </div>
+                            <br>
+                            <h6 style="color: black;">Thông tin liên lạc</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cusName">Tên khách hàng:</label>
+                                        <input type="text" name="cusName" class="form-control" placeholder="Enter Customer Name" id="cusName" value="{{user.firstName}} {{user.lastName}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    <label for="addrCus">Địa chỉ:</label>
+                                    <input type="text" name="addrCus" class="form-control" placeholder="Enter Customer Address" id="addrCus" value="ABC Pastel">
+                                    </div>
+                                </div>	
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email:</label>
+                                        <input type="text" name="email"  class="form-control" placeholder="Enter Email" id="email" value="{{user.emailID}}">
+                                    </div>
+                                </div>	
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone">Số điện thoại:</label>
+                                        <input type="text" name="phone"  class="form-control" placeholder="Enter Phone Number" id="phone" value="0845212525">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-success" value="Xác nhận">
+                        </form>
+                        <div class="progress" *ngIf="createProgressCheck != null && createProgressCheck == false">
+                            <div class="circle"></div>
+                            <div class="circle-small"></div>
+                            <div class="circle-big"></div>
+                            <div class="circle-inner-inner"></div>
+                            <div class="circle-inner"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </article>
+</div>

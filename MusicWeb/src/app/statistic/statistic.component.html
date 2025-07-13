@@ -1,0 +1,83 @@
+<div class="space-100"></div>
+<div class="container">
+    <form class="form-style-12" #ownerShipSearchPost="ngForm" autocomplete="off" (ngSubmit)="searchOwnerShip(ownerShipSearchPost.value)">
+        <ul>
+            <li>
+                <select class="form-control" id="searchOption"  style="flex: 0.2; border-radius: 0;">
+                    <option disabled value="">All Filters</option>
+                    <option>Transaction Hash</option>
+                </select>
+                <input type="text" name="searchHash" ngModel class="field-style field-split align-right" placeholder="Search by Transaction Hash " style="flex: 1;"/>
+            </li>
+            <li>
+                <input type="submit" value="Send Message" />
+            </li>
+        </ul>
+    </form>
+</div>
+<div class="statistic-blk container">
+    <h1>Latest Transactions</h1>
+    <table class="blk-table">
+        <thead>
+            <tr>
+                <th>Tx ID</th>
+                <th>Type</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Block Height</th>
+                <th>Gas Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items">
+                <td><a href="https://ropsten.etherscan.io/tx/{{item.txIdFull}}">{{item.txId}}</a></td>
+                <td><span class="btn btn-info">Transfer</span></td>
+                <td>{{item.from}}</td>   
+                <td>{{item.to}}</td>  
+                <td>{{convert.blockNumber}}</td>
+                <td>{{item.gasPrice}} GWei</td>
+            </tr>
+        </tbody>
+    </table>  
+</div>
+
+<div class="space-50"></div>
+
+<div class="music-blk container">
+    <div class="blk-front">
+        <div class="blk-Buy">
+            <a href="/music/user-buyer"><h3 class="btn btn-danger text-white">Buy Now!</h3></a>
+        </div>
+        <div class="blk-Intro">
+            <h1>Music Asset List</h1>  
+        </div>
+        <div class="blk-Sell" *ngIf="userID">
+            <a href="http://localhost:8080/hdwallets/AssetCopyRight/AssetCopyRight.php"><h3 class="btn btn-info text-white">Sell Music</h3></a>
+        </div>
+    </div> 
+    <table class="blk-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Album</th>
+                <th>Publishing Year</th>
+                <th>Owner Id</th>
+                <th>Creature Type</th>
+                <th>Owner Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of musicItemList; let indexOfelement=index;">
+                <td>{{item.name}}</td>
+                <td>Title {{indexOfelement+1}}</td>
+                <td>{{item.album}}</td>    
+                <td>{{item.publishingYear}}</td>
+                <td>{{item.ownerId}}</td>
+                <td>{{item.creatureType}}</td>
+                <td>{{item.ownerType}}</td>
+            </tr>
+        </tbody>
+    </table>  
+</div>
+<div class="space-100"></div>

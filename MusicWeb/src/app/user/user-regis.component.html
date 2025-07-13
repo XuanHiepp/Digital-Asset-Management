@@ -1,0 +1,87 @@
+<div class="space-200"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2" style="margin-top: 20px; margin-bottom: 30px;">
+            <div class="card">
+                <div class="card-header">Register</div>
+
+                <div class="card-body">
+                   <form action="" #regisPost="ngForm" autocomplete="off" (ngSubmit)="register(regisPost.value)">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="firstName" class="col-md-6 control-label">First Name</label>
+
+                                <div class="col-md-12">
+                                    <input id="firstName" type="text" class="form-control" name="firstName" ngModel required autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group} col-md-6">
+                                <label for="lastName" class="col-md-6 control-label">Last Name</label>
+
+                                <div class="col-md-12">
+                                    <input id="lastName" type="text" class="form-control" name="lastName" ngModel required autofocus>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="emailID" class="col-md-6 control-label">E-Mail Address</label>
+
+                                <div class="col-md-12">
+                                    <input id="emailID" type="email" class="form-control" name="emailID" ngModel required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="dateOfBirth" class="col-md-6 control-label">Date Of Birth</label>
+
+                                <div class="col-md-12">
+                                    <input id="dateOfBirth" type="date" class="form-control" name="dateOfBirth" ngModel required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="password" class="col-md-6 control-label">Password</label>
+
+                                <div class="col-md-12">
+                                    <input id="password" type="password" class="form-control" name="password" ngModel required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="confirmPassword" class="col-md-6 control-label">Confim Password</label>
+
+                                <div class="col-md-12">
+                                    <input id="confirmPassword" type="password" class="form-control" name="confirmPassword" ngModel required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="userType" class="col-md-6 control-label">User Type</label>
+
+                                <div class="col-md-12">
+                                    <select class="form-control" name="userType" id="userType" ngModel>
+                                        <option disabled>Select Creature Type</option>
+                                        <option value="0">Buyer</option>
+                                        <option value="1">Seller</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <input type="submit" class="btn btn-success" value="Register"/>
+                            </div>
+                        </div>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
