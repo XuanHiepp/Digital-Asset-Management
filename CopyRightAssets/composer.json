@@ -1,0 +1,5 @@
+{
+    "require": {
+        "aminyazdanpanah/php-ffmpeg-video-streaming": "^1.2"
+    }
+}

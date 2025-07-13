@@ -1,0 +1,177 @@
+<div class="space-200"></div>
+<section class="container-fluid clearfix" style="margin-top: 50px; margin-left: 15%; position: relative;">
+    <div class="ChangeList">
+        <button class="btn btn-danger" (click)="SetUserTypeBuyer()"  *ngIf="userTypeCheck == 'seller'" style="position: absolute; top: -10%; left: 69.3%; z-index: 99;">Asset List</button>
+        <button class="btn btn-danger" (click)="SetUserType()"  *ngIf="userTypeCheck == 'buyer'" style="position: absolute; top: -10%; left: 68.3%; z-index: 99;">Asset Buyer</button>
+    </div>
+    <div class="row col-sm-9" style="margin: 100px 0 80px 0px; padding: 0; display: flex;">
+        <div class="infomation_user" style="position: relative; flex: 0.6;">
+            <div class="avatar_name_user clearfix">
+                <div class="div_picture_profile" style="position: absolute;">
+                    <img class="picture_profile" src="../../assets/man.png" alt="">
+                </div>
+
+                <label class="info_user_name">{{user.firstName}} {{user.lastName}}</label>
+            </div>
+            <div class="">
+                <div class="detail_info" style="margin-left: 5%; margin-top: 25px; display: flex;">
+                    <div style="flex: 1;">
+                        <label style="float: left;">Email: </label>
+                        <p style="margin-left: 75px; margin-right: 5%">{{user.emailID}}</p>
+                    </div>
+                    <!-- Button trigger modal -->
+                    <div style="flex: 0.12;">
+                        <img src="../../assets/add.png" alt="" class="btn" style="width: 109%; cursor: pointer;" data-toggle="modal" data-target="#ownerAddr" (click)="loadOwnerInfo()">
+                    </div >
+                </div>
+                <div class="detail_info" style="margin-left: 5%; display: block;">
+                    <label style="float: left;">Giới tính: </label>
+                    <p style="margin-left: 75px; margin-right: 5%">Female</p>
+                </div>
+                <div class="detail_info" style="margin-left: 5%; display: block;">
+                    <label style="float: left;">Phone: </label>
+                    <p style="margin-left: 75px; margin-right: 5%">
+                        0542585625
+                    </p>
+                </div>
+                <div class="detail_info" style="margin-left: 5%; display: block;">
+                    <label style="float: left;">Địa chỉ: </label>
+                    <p style="margin-left: 75px; margin-right: 5%;">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    </p>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="ownerAddr" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <form class="form-style-12" #ownerAddrPost="ngForm" autocomplete="off" (ngSubmit)="updateOwnerInfo(ownerAddrPost.value)">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content" style="margin-top: 40%;">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="exampleModalLongTitle" style="color: black;">Owner Info</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Owner Address</label>
+                                            <div style="display: flex;">
+                                                <div style="flex: 0.9;">
+                                                    <input name="ownerAddress" class="form-control" ngModel id="ownerAddrIdInput">
+                                                    <input name="ownerAddress" class="form-control" value="{{ownerAddr}}" id="ownerAddrId" disabled>
+                                                </div>
+                                                <div style="flex: 0.1;">
+                                                    <img src="../../assets/refresh.png" alt="" class="btn" style="width: 109%; cursor: pointer;" id="updateAddr">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <label>Owner PrivateKey</label>
+                                            <div style="display: flex;">
+                                                <div style="flex: 0.9;">
+                                                    <input name="ownerPrivateKey" class="form-control" ngModel id="ownerPrKeyIdInput">
+                                                    <input name="ownerPrivateKey" class="form-control" value="{{ownerPrKey}}" id="ownerPrKeyId" disabled>
+                                                </div>
+                                                <div style="flex: 0.1;">
+                                                    <img src="../../assets/refresh.png" alt="" class="btn" style="width: 109%; cursor: pointer;" id="updatePrKey">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-info" value="Xác nhận">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="detail_info" style="margin-left: 23%; display: block; border: none; margin-top: 70px;">
+                    <a href="#" class="btn btn-danger" (click)="logOut()" style="margin-right: 17px;">Đăng xuất</a>
+                    <a href="http://localhost:4200/music/statistic" class="btn btn-success">Trở về trang chủ</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="history_orders" style="flex: 1;">
+            <div class="one_history_order clearfix" *ngFor="let item of musicItemList | paginate: { itemsPerPage: 2, currentPage: page, totalItems: totalRecords }; let indexOfelement=index; ">
+                <div class="col-sm-3">
+                    <div style="margin-top: 21px;">
+                        <div class="lyrics" *ngIf="item.lyricsCheck">
+                            <img class="picture" src="../../assets/lyrics.png" alt="" style="width: 56%;">
+                            <p style="color: #ff2f8e; font-weight: 700;">{{item.creatureType}}</p>
+                        </div>
+                        <div class="audio" *ngIf="item.audioCheck">
+                            <img class="picture" src="../../assets/audio.png" alt="" style="width: 56%;" >
+                            <p style="color: #ff2f8e; font-weight: 700;">{{item.creatureType}}</p>
+                        </div>
+                        <div class="video" *ngIf="item.mvCheck">
+                            <img class="picture" src="../../assets/video.png" alt="" style="width: 56%;" >
+                            <p style="color: #ff2f8e; font-weight: 700;">{{item.creatureType}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9" style="position: relative;">
+                    <p>Tài sản #{{indexOfelement+1}}</p>
+                    <span>{{item.dateCreated |  date:'dd'}} {{item.dateCreated |  date:'MMMM'}}</span>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="music-info">
+                        <h6>Tên tài sản: <label style="color: #ff2f8e;">{{item.name}}</label> <label style="color: gray; font-size: 15px; float: right;
+                            margin-right: 24%;">(Album Gốc: {{item.album}})</label></h6> 
+                        <h6>Chủ sở hữu: <label style="color: #ff2f8e;">{{item.ownerType}}</label></h6>
+                        <h6 *ngIf="userTypeCheck == 'buyer' && item.isPermanent == false">Khóa 1: <label style="color: #ff2f8e;">{{item.key1}}</label></h6>
+                        <h6 *ngIf="userTypeCheck == 'buyer' && item.isPermanent == true && item.isConfirmed == false">Khóa 1: <label style="color: #ff2f8e;">{{item.key1}}</label></h6>
+                        <h6 *ngIf="userTypeCheck == 'buyer' && item.isPermanent == true && item.isConfirmed == true">Khóa đầy đủ: <label style="color: #ff2f8e;">{{item.fullKey}}</label></h6>
+                        <h6 *ngIf="userTypeCheck == 'seller'">Khóa đầy đủ: <label style="color: #ff2f8e;">{{item.fullKey}}</label></h6>
+                        <img *ngIf="userTypeCheck == 'seller'" src="../../assets/share.png" alt="" class="btn" style="width: 78px; height: 66px; cursor: pointer; position: absolute; right: -2px; bottom: 69px;" data-toggle="modal" data-target="#shareOwnerShip" (click)="loadMusicId(item.id)">
+                    </div>
+                    
+                    <hr>
+                    <div class="view_detail">
+                        <label>Trạng thái: {{item.transactionStatus}}</label>
+                        
+                        <a href="/music/user-seller-item/{{item.id}}" *ngIf="userTypeCheck == 'seller'">View</a>
+                        <a href="/music/check-key/{{item.id}}_{{item.key1}}_{{item.musicLink}}_{{item.transferId}}_{{item.mediaLink}}" *ngIf="userTypeCheck == 'buyer' && item.mediaLink != ''">View</a>
+                        <a href="/music/check-key/{{item.id}}_{{item.key1}}_{{item.musicLink}}_{{item.transferId}}" *ngIf="userTypeCheck == 'buyer' && item.mediaLink == ''">View</a>
+                        <a href="/music/ownership/{{item.id}}_0" *ngIf="userTypeCheck == 'seller'" style="position: absolute; bottom: 11px; right: 96px;">OwnerShip</a>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="totalRecords != 0" style="margin-left: 4%;">
+                <pagination-controls maxSize="5" directionLinks="true"  (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="shareOwnerShip" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <form class="form-style-12" #ownerShipSharingPost="ngForm" autocomplete="off" (ngSubmit)="shareOwnerShip(ownerShipSharingPost.value)">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content" style="margin-top: 40%;">
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="exampleModalLongTitle" style="color: black;">Chia sẻ quyền sở hữu</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Người thừa hưởng</label>
+                                    <select class="form-control" name="userId" id="ownerShipUser" ngModel>
+                                        <option disabled value="">Select Inherit User</option>
+                                        <option *ngFor="let item of userList" value="{{item.userID}}">{{item.firstName}} {{item.lastName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-info" value="Xác nhận">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+

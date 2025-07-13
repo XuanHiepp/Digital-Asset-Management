@@ -1,0 +1,208 @@
+<div class="limiter" style="background: #d1d1d1; padding-bottom: 93px;">
+    <div class="container-table100">
+        <div class="card">
+            <div class="thumbnail"><img class="left" src="../../assets/music-img.jpg"/></div>
+            <div class="right">
+                <h1>Why you Need More Magnesium in Your Daily Diet</h1>
+                <div class="separator"></div>
+                <p style="margin-bottom: 40px;">Magnesium is one of the six essential macro-minerals that is required by the body for energy production and synthesis of protein and enzymes. It contributes to the development of bones and most importantly it is responsible for synthesis of your DNA and RNA. A new report that has appeared in theBritish Journal of Cancer, gives you another reason to add more magnesium to your diet...</p>
+            </div>
+            <h5 style="color: #212529a8;">12</h5>
+            <h6>JANUARY</h6>
+            <div class="fab"><i class="fa fa-arrow-down fa-3x"> </i></div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="margin: 0 auto;">
+        <div class="table100 ver5 m-b-110">
+            <h3 style="color: #1875d0;" class="text-center">Giao dịch mua bán</h3>
+            <br>
+            <table data-vertable="ver5">
+                <thead>
+                    <tr class="row100 head">
+                        <th class="column100 column1" data-column="column1">Khách hàng</th>
+                        <th class="column100 column2" data-column="column2">Loại giao dịch</th>
+                        <th class="column100 column3" data-column="column3">Trị giá</th>
+                        <th class="column100 column4" data-column="column4">Ngày giao dịch</th>
+                        <th class="column100 column5" data-column="column5">Trạng thái</th>
+                        <th class="column100 column6" data-column="column6">Transaction Hash</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row100" *ngFor="let item of musicTransact">
+                        <td class="column100 column1" data-column="column1">{{item.buyerName}}</td>
+                        <td class="column100 column2" data-column="column2">GD Thương Mại</td>
+                        <td class="column100 column3" data-column="column3">{{item.amountValue}} Ether</td>
+                        <td class="column100 column4" data-column="column4">{{item.dateCreated |  date:'dd/MM/yyyy'}}</td>
+                        <td class="column100 column5" data-column="column5">Success</td>
+                        <a href="https://ropsten.etherscan.io/tx/{{item.transactionHashLink}}"><td class="column100 column6" data-column="column6">{{item.transactionHash}}</td></a>
+                    </tr>                  
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table100 ver5 m-b-110" style="margin-top: 50px;">
+            <h3 style="color: #1875d0;" class="text-center">Giao dịch bản quyền</h3>
+            <br>
+            <table data-vertable="ver5">
+                <thead>
+                    <tr class="row100 head">
+                        <th class="column100 column1" data-column="column1">Khách hàng</th>
+                        <th class="column100 column2" data-column="column2">Loại giao dịch</th>
+                        <th class="column100 column3" data-column="column3">Trị giá</th>
+                        <th class="column100 column4" data-column="column4">Ngày giao dịch</th>
+                        <th class="column100 column5" data-column="column5">Trạng thái</th>
+                        <th class="column100 column6" data-column="column6">Transaction Hash</th>
+                        <th class="column100 column6" data-column="column6">Xét duyệt</th>
+                        <th class="column100 column6" data-column="column6">Tạo khóa mới</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row100" *ngFor="let item of licenceMusicTransact">
+                        <td class="column100 column1" data-column="column1">{{item.buyerName}}</td>
+                        <td class="column100 column2" data-column="column2">GD Bản Quyền</td>
+                        <td class="column100 column3" data-column="column3">{{item.amountValue}} Ether</td>
+                        <td class="column100 column4" data-column="column4">{{item.dateCreated |  date:'dd/MM/yyyy'}}</td>
+                        <td class="column100 column5" data-column="column5" *ngIf="item.isConfirmed == true">Success</td>
+                        <td class="column100 column5" data-column="column5" *ngIf="item.isConfirmed == false">Pending</td>
+                        <a href="https://ropsten.etherscan.io/tx/{{item.transactionHashLink}}"><td class="column100 column6" data-column="column6">{{item.transactionHash}}</td></a>
+                        <td class="column100 column6" *ngIf="item.isConfirmed == false" data-column="column6"><a href="#" class="tag" data-toggle="modal" data-target="#approveTransact" (click)="aprroveTypeChange(item.id)">Duyệt</a></td>
+                        <td class="column100 column6" *ngIf="item.isConfirmed == true" data-column="column6">
+                            <a class="tag text-white" style="cursor: pointer;"> Đã Duyệt</a>
+                        </td>
+                        <td class="column100 column6" *ngIf="item.isConfirmed == true" data-column="column6">
+                            <a href="/music/ownership/{{item.id}}_{{item.buyerId}}" class="tag text-white" style="cursor: pointer;">Change key</a>
+                        </td>
+                        <td class="column100 column6" *ngIf="item.isConfirmed == false" data-column="column6">
+                            <a class="tag text-white" style="cursor: pointer;">Not Allowed</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="approveTransact" tabindex="-1" role="dialog" aria-labelledby="aprroveModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="margin: 0 auto;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="content">  
+                    <div id="tile1" class="tile">
+                    
+                    <div class="wrapper settings-form">
+                          <div class="header">
+                           Settings
+                           <div class="close">
+                               <div class="cy"></div>
+                               <div class="cx"></div>
+                           </div>
+                       </div>
+                       
+                       <form action="">
+                           <div>
+                               <label>EVENT NAME</label>
+                               <input type="text" value="Mua Bản Quyền" />
+                           </div>
+                           
+                           <div class="short">
+                               <label>START DATE</label>
+                               <input type="text" value="{{dateStart | date:'dd MMMM yyyy'}}" />
+                           </div>
+                           
+                           <div class="short">
+                               <label>START DATE</label>
+                               <input type="text" value="{{dateEnd | date:'dd MMMM yyyy'}}" />
+                           </div>
+                           
+                           <button (click)="approveTransaction()" id="approveId">DUYỆT GIAO DỊCH</button>
+                       </form>                                                         
+                    </div>
+                   
+                    <div class="wrapper">
+                        <div class="header">Giao dịch bản quyền</div>
+                            <svg class="settings" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                width="21.544px" height="21.508px" viewBox="0 0 21.544 21.508" enable-background="new 0 0 21.544 21.508" xml:space="preserve">
+                                <g>
+                                    <g>
+                                        <path d="M19.181,7.801L19.083,7.77c-0.086-0.234-0.182-0.465-0.285-0.689l0.047-0.092c0.354-0.43,0.547-0.967,0.547-1.529
+                                        c0-0.643-0.25-1.246-0.705-1.699l-0.852-0.854c-0.293-0.293-0.779-0.781-1.582-0.781c-0.736,0-1.352,0.439-1.615,0.662
+                                        L14.55,2.832c-0.225-0.105-0.455-0.199-0.689-0.285l-0.031-0.1c-0.119-1.227-1.15-2.172-2.395-2.172h-1.156
+                                        c-1.219,0-2.242,0.918-2.387,2.113l-0.01,0.023C7.616,2.506,7.358,2.611,7.106,2.729L6.991,2.67
+                                        C6.446,2.238,5.886,2.238,5.544,2.238c-0.643,0-1.246,0.25-1.701,0.705L3.026,3.758C2.571,4.211,2.321,4.816,2.321,5.459
+                                        c0,0.561,0.191,1.098,0.543,1.525l0.049,0.098C2.81,7.305,2.716,7.533,2.63,7.768L2.526,7.801
+                                        c-1.225,0.121-2.168,1.152-2.168,2.395v1.156c0,1.242,0.943,2.273,2.168,2.393l0.105,0.035c0.084,0.234,0.18,0.463,0.281,0.686
+                                        l-0.049,0.098c-0.352,0.428-0.543,0.965-0.543,1.523c0,0.643,0.25,1.248,0.705,1.701l0.816,0.816
+                                        c0.438,0.439,1.059,0.691,1.703,0.691c0.566,0,1.1-0.188,1.52-0.529l0.098-0.049c0.225,0.104,0.453,0.197,0.686,0.281l0.035,0.105
+                                        c0.121,1.225,1.152,2.166,2.395,2.166h1.156c1.242,0,2.271-0.941,2.393-2.164l0.035-0.107c0.234-0.084,0.463-0.18,0.688-0.283
+                                        l0.092,0.047c0.422,0.344,0.957,0.533,1.525,0.533c0.643,0,1.264-0.252,1.703-0.689l0.816-0.818
+                                        c0.455-0.453,0.705-1.059,0.705-1.703c0-0.559-0.193-1.096-0.547-1.525l-0.047-0.092c0.104-0.225,0.199-0.455,0.283-0.689
+                                        l0.1-0.033c1.227-0.117,2.172-1.148,2.172-2.393v-1.156C21.353,8.951,20.407,7.92,19.181,7.801z M19.833,11.352
+                                        c0,0.473-0.367,0.861-0.838,0.885c-0.066,0.004-0.133,0.016-0.197,0.035l-0.549,0.18c-0.234,0.076-0.416,0.262-0.49,0.496
+                                        c-0.127,0.404-0.289,0.801-0.484,1.176c-0.113,0.217-0.113,0.475-0.004,0.693l0.26,0.512c0.031,0.061,0.068,0.115,0.113,0.166
+                                        c0.15,0.164,0.229,0.369,0.229,0.592c0,0.236-0.092,0.459-0.26,0.627l-0.818,0.818c-0.301,0.301-0.902,0.316-1.217,0.031
+                                        c-0.051-0.045-0.107-0.084-0.168-0.115l-0.512-0.258c-0.219-0.111-0.477-0.109-0.693,0.004c-0.369,0.191-0.764,0.354-1.17,0.482
+                                        c-0.232,0.072-0.414,0.252-0.492,0.482l-0.184,0.553c-0.023,0.064-0.035,0.133-0.039,0.201c-0.025,0.471-0.414,0.838-0.885,0.838
+                                        h-1.156c-0.471,0-0.859-0.367-0.885-0.838c-0.004-0.068-0.016-0.135-0.039-0.201L9.171,18.16c-0.076-0.232-0.26-0.412-0.494-0.484
+                                        c-0.406-0.129-0.797-0.289-1.162-0.48c-0.111-0.057-0.23-0.086-0.352-0.086c-0.117,0-0.232,0.025-0.34,0.08l-0.518,0.256
+                                        c-0.063,0.031-0.119,0.07-0.172,0.117c-0.314,0.285-0.916,0.27-1.217-0.033l-0.816-0.816c-0.168-0.166-0.26-0.391-0.26-0.627
+                                        c0-0.223,0.078-0.428,0.227-0.592c0.045-0.051,0.084-0.107,0.115-0.17l0.258-0.518c0.109-0.219,0.105-0.475-0.006-0.689
+                                        c-0.191-0.369-0.354-0.762-0.48-1.166c-0.072-0.232-0.252-0.414-0.482-0.492l-0.553-0.186c-0.064-0.021-0.133-0.033-0.201-0.037
+                                        c-0.471-0.025-0.84-0.414-0.84-0.885v-1.156c0-0.473,0.369-0.861,0.84-0.885c0.068-0.004,0.137-0.018,0.201-0.039L3.47,9.088
+                                        C3.7,9.01,3.88,8.826,3.954,8.596c0.127-0.408,0.289-0.799,0.48-1.164C4.548,7.215,4.55,6.959,4.44,6.74L4.183,6.223
+                                        c-0.031-0.061-0.07-0.119-0.115-0.17C3.919,5.889,3.841,5.684,3.841,5.459c0-0.236,0.092-0.457,0.26-0.625l0.816-0.816
+                                        c0.168-0.168,0.391-0.26,0.627-0.26c0.281,0,0.398,0.01,0.525,0.121C6.118,3.924,6.175,3.961,6.233,3.99l0.531,0.266
+                                        c0.219,0.109,0.477,0.105,0.691-0.008c0.383-0.199,0.793-0.367,1.217-0.5c0.215-0.066,0.391-0.225,0.477-0.432l0.188-0.449
+                                        c0.033-0.076,0.051-0.16,0.057-0.244c0.029-0.463,0.418-0.828,0.885-0.828h1.156c0.471,0,0.859,0.369,0.885,0.84
+                                        c0.004,0.066,0.016,0.133,0.037,0.197l0.178,0.549c0.076,0.232,0.262,0.416,0.496,0.488c0.406,0.127,0.803,0.291,1.176,0.484
+                                        c0.217,0.113,0.475,0.115,0.693,0.004l0.51-0.258c0.063-0.031,0.119-0.072,0.172-0.119c0.211-0.195,0.494-0.338,0.672-0.338
+                                        c0.154,0,0.277,0.107,0.506,0.338l0.855,0.854c0.166,0.168,0.258,0.389,0.258,0.625c0,0.225-0.078,0.43-0.227,0.596
+                                        c-0.045,0.049-0.084,0.105-0.115,0.166l-0.258,0.51c-0.111,0.219-0.109,0.479,0.004,0.695c0.193,0.373,0.357,0.77,0.484,1.174
+                                        c0.072,0.234,0.254,0.42,0.488,0.496l0.549,0.178c0.063,0.021,0.131,0.033,0.197,0.037c0.471,0.023,0.838,0.412,0.838,0.885
+                                        V11.352z M10.856,7.445c-1.836,0-3.328,1.492-3.328,3.328s1.492,3.328,3.328,3.328c1.834,0,3.328-1.492,3.328-3.328
+                                        S12.69,7.445,10.856,7.445z M10.856,12.582c-0.998,0-1.811-0.811-1.811-1.809s0.813-1.809,1.811-1.809s1.809,0.811,1.809,1.809
+                                        S11.854,12.582,10.856,12.582z"/>
+                                    </g>
+                                </g>
+                            </svg>
+                        
+                            <div class="dates">
+                            <div class="start">
+                                <strong>STARTS</strong>
+                                {{dateStart | date:'dd MMMM yyyy'}}
+                                <span></span>
+                            </div>
+                            <div class="ends">
+                                <strong>ENDS</strong>
+                                {{dateEnd | date:'dd MMMM yyyy'}}
+                            </div>
+                            </div>
+                        
+                            <div class="stats">
+                            <div>
+                                <strong>VALUE</strong>
+                                {{amountValue}} Ether
+                            </div>
+                            
+                            <div>
+                                <strong>JOINED</strong>
+                                562
+                            </div>
+                            
+                            <div>
+                                <strong>DECLINED</strong>                    
+                                182
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="space-50"></div>
+            <!-- <div class="modal-footer">
+                <input type="submit" class="btn btn-info" value="Lưu">
+            </div> -->
+        </div>
+    </div>
+</div>

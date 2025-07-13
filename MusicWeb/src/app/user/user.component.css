@@ -1,0 +1,30 @@
+div {
+    color: black;
+}
+
+.heading2{
+    font-size: 24px;
+    color: #F54F4D;
+    text-transform: none;
+    font-weight: 600;
+    padding: 0px;
+    text-transform: uppercase;
+    font-family: 'Crete Round', serif;
+  }
+  
+  
+  .newcustomer{
+    width: 100%;
+    min-height: 100%;
+    float: left;
+    border: 1px solid #E7E7E7;
+    padding: 20px 20px;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    font-family: 'Open Sans', sans-serif;
+    color: #96979d;
+    font-size: 13px;
+    line-height: normal;
+  }
+  

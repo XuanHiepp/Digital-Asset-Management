@@ -1,0 +1,7 @@
+A Blockchain and Smart Contract Based Application for Music Copyright Protection
+https://dl.acm.org/doi/pdf/10.1145/3301403.3301404?download=true
+Digital Certificates and Public Key Infrastructure (PKI)
+http://cuonglv1109.blogspot.com/2020/03/digital-certificate-and-certificate.html
+Mastering Bitcoin: Programming the Open Blockchain
+http://file.allitebooks.com/20170829/Mastering%20Bitcoin,%202nd%20Edition.pdf
+Ebook Laudon - E-Commerce 2016: Public Key Cryptography Using Digital Signatures
